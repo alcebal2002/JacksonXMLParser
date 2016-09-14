@@ -1,0 +1,2306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 4 U (http://www.xmlspy.com) by David Tullett (BT) -->
+<!-- Please update version tag below always *before* releasing to repository with maven -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.34.3" attributeFormDefault="unqualified" elementFormDefault="qualified">
+<xs:simpleType name="ContentType">
+<xs:annotation>
+<xs:documentation>This contains the file type</xs:documentation>
+</xs:annotation>
+<xs:restriction base="xs:string">
+
+<xs:enumeration value="RISK"/>
+
+<xs:enumeration value="PNL"/>
+
+<xs:enumeration value="ATT"/>
+
+<xs:enumeration value="IPV"/>
+
+<xs:enumeration value="MRM"/>
+
+<xs:enumeration value="MCC"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="SignatoryId">
+
+
+<xs:annotation>
+
+<xs:documentation>Will = flash or the user id of the user who signed off</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="32"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="SignoffGroup">
+
+
+<xs:annotation>
+
+<xs:documentation>The name of the sign off group the data is a member of</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="CommonReference">
+
+
+<xs:annotation>
+
+<xs:documentation>An external system Trade Id</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="Narrative">
+
+
+<xs:annotation>
+
+<xs:documentation>Free text entry field in cars that describes the reserve entry you are adding</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="256"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="NumericId">
+
+
+<xs:annotation>
+
+
+<xs:documentation>
+Max 10-digit system numeric ID
+</xs:documentation>
+
+</xs:annotation>
+
+<xs:restriction base="xs:integer"/>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="dbRPID">
+
+
+<xs:annotation>
+
+
+<xs:documentation>
+Max 12-digit system numeric ID
+</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="12"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="StringId">
+
+
+<xs:annotation>
+
+
+<xs:documentation>
+64-character string ID
+</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="BookName">
+
+
+<xs:annotation>
+
+<xs:documentation/>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="LegalEntity">
+
+
+<xs:annotation>
+
+<xs:documentation>The legal entity associated to the tradeBook as defined in the company_id field in book_opening2 table in dbNexus. The format is AMI code</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="Desk">
+
+
+<xs:annotation>
+
+<xs:documentation>The desk that the tradeBook rolls up into, as defined in the desk field in book_opening2 table in dbNexus</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="40"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="ManagementArea">
+
+
+<xs:annotation>
+
+<xs:documentation>The management (profit centre) area associated with the trade book as defined in the management_area field in book_opening2 table in dbNexus</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="GLRegion">
+
+
+<xs:annotation>
+
+<xs:documentation>The general ledger region will help drive processing for the different SAP instances globally. Source to be determined though likely book_opening2 in dbNexus</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="GermanBankingTrading">
+
+
+<xs:annotation>
+
+<xs:documentation>Head office view of whether a book is used for active trading or banking where intention is to hold to maturity. Source to be determined though likely book_opening2 in dbNexus</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="LocalBankingTrading">
+
+
+<xs:annotation>
+
+<xs:documentation>Local regulatory reporting view of whether a book is used for active trading or banking where intention is to hold to maturity. Source to be determined though likely book_opening2 in dbNexus</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="1"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="AggregationLevel">
+
+
+<xs:annotation>
+
+<xs:documentation>Indicates that the measure information represents data at an aggregation above individual trade or risk trade level split by the remaining published characteristics in the schema</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="TradeSource">
+
+
+<xs:annotation>
+
+<xs:documentation>The booking system of the trading trade</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="32"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="PoolId">
+
+
+<xs:annotation>
+
+<xs:documentation>The pool id for the trade</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="TradeId">
+
+
+<xs:annotation>
+
+<xs:documentation>The unique trade id as booked in the trading system</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="Version">
+
+
+<xs:annotation>
+
+<xs:documentation>The version number of the trade in the trading system</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="SettlementEngineSource">
+
+
+<xs:annotation>
+
+<xs:documentation>The system where the trade is booked for settlement</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="SettlementSourceId">
+
+
+<xs:annotation>
+
+<xs:documentation>The unique id of the trade in settlement system</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="40"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="SettlementVersion">
+
+
+<xs:annotation>
+
+<xs:documentation>the version of the trade in settlement system</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="ISIN">
+
+
+<xs:annotation>
+
+<xs:documentation>ISIN of the security being traded</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="12"/>
+
+<xs:pattern value="[A-Z]{2}[A-Z0-9]{9}\d"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="CUSIP">
+
+
+<xs:annotation>
+
+<xs:documentation>The CUSIP number of the security being traded</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="9"/>
+
+<xs:pattern value="[A-Z0-9]{8}\d"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="PrivatePlacement">
+
+
+<xs:annotation>
+
+<xs:documentation>The internal id of the instrument being traded</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="9"/>
+
+<xs:pattern value="PP[A-Z0-9]{6}\d"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="OtherSecurityId">
+
+
+<xs:annotation>
+
+<xs:documentation>Other security identifiers could include: Rolf and Nolan/Bloomberg Futures, Rolf and Nolan/Bloomberg Future Options, INSYD (Stirt Austrailia) Money Market underlyings</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="DBInstrumentId">
+
+
+<xs:annotation>
+
+<xs:documentation>The unique id of the instrument as defined in dbInstrument database (to be built). Exchange traded instruments only</xs:documentation>
+
+</xs:annotation>
+
+<xs:restriction base="xs:base64Binary"/>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="FinancialProductType">
+
+
+<xs:annotation>
+
+<xs:documentation>Level 4 (ie most granular) short code of financial product type hierarchy</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="UnderlyingId">
+
+
+<xs:annotation>
+
+<xs:documentation>The identifier of the underlying instrument in a derivative trade</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="ReportingCurve">
+
+
+<xs:annotation>
+
+<xs:documentation>The curve associated to the booked trade for reporting purposes. This will be used to identify trades that have been booked as a hedge, eg an IR Swap to hedge interest rate risk on a CDS would have refCurve of say LIBOR and reporting curve = cds reference credit curve</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="CreditCurveFull">
+
+
+<xs:annotation>
+
+<xs:documentation>The full name of the refCurve as enriched from the Redback credit static system</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="CountryOfIssuer">
+
+
+<xs:annotation>
+
+<xs:documentation>The country of issuer of the refCurve as enriched from the Redback credit static system</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="Sector">
+
+
+<xs:annotation>
+
+<xs:documentation>The sector of the refCurve as enriched from the Redback credit static system</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="32"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="TradeGroupId">
+
+
+<xs:annotation>
+
+<xs:documentation>For BAC specific reporting</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="DBClientId">
+
+
+<xs:annotation>
+
+<xs:documentation>The standard internal identifier of a counterparty enriched from dbClient (to be built)</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="CustomerId">
+
+
+<xs:annotation>
+
+<xs:documentation>The standard internal identifier of a counterparty enriched from the trade source. Note that from Risk Engine is cannot be found in trade source the value from valuation source will be used instead</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="CounterpartySource">
+
+
+<xs:annotation>
+
+<xs:documentation>The source of the customerId. This should help guarantee uniqueness when applied with customerId</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="CounterpartyIdLong">
+
+
+<xs:annotation>
+
+<xs:documentation>The long name of the customerId as enriched from Paragon source legal name</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="256"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="InternalExternalFlag">
+
+
+<xs:annotation>
+
+<xs:documentation>Indicates whether the counterparty is internal or external to DB as defined in Paragon. The internal classification will be according to DB general ledger rules</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="32"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="HOCounterpartyType">
+
+
+<xs:annotation>
+
+<xs:documentation>Indicates the type of counterparty as viewed by Head Office enriched from Paragon (to be determined)</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="LegalEntityClient">
+
+
+<xs:annotation>
+
+<xs:documentation>The legal entity of the internal counterparty enriched from dbNexus book_opening2 table. This depends on the quality of internal counterparty definition in trade bookings</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="ManagementAreaClient">
+
+
+<xs:annotation>
+
+<xs:documentation>The management area (profit centre) of the internal counterparty enriched from dbNexus book_opening2 table. This depends on the quality of internal counterparty definition in trade bookings</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="BuySell">
+
+
+<xs:annotation>
+
+<xs:documentation>Populated based on the first leg of trades</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:pattern value="(B|S)"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="CurrencyId">
+
+
+<xs:annotation>
+
+<xs:documentation>Identifies a currency using the ISO 4217 standard</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="3"/>
+
+<xs:pattern value="[A-Z]*"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="Amount">
+
+
+<xs:annotation>
+
+<xs:documentation>Elements of this type contain a quantity of cash denominated in a currency</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:decimal">
+
+<xs:totalDigits value="18"/>
+
+<xs:fractionDigits value="10"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="Rate">
+
+
+<xs:annotation>
+
+<xs:documentation/>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:decimal">
+
+<xs:totalDigits value="18"/>
+
+<xs:fractionDigits value="10"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="AssetLiabilityFlag">
+
+
+<xs:annotation>
+
+<xs:documentation>Indicates whether the trade represents an Asset or Liability</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:pattern value="(A|L)"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="Fas133Flag">
+
+
+<xs:annotation>
+
+<xs:documentation>Indicates whether the trade is being used as a hedge under FAS133 rules</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:pattern value="(Y|N)"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="StructureId">
+
+
+<xs:annotation>
+
+<xs:documentation>An identifier that may link many internal trading trades to an internal transaction</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="ProductType">
+
+
+<xs:annotation>
+
+<xs:documentation>The product type of a trade as defined by the booking/settlement system</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="250"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="valEngProdType">
+
+
+<xs:annotation>
+
+<xs:documentation>The product type of a trade as defined by the valuation engine from which the valuation was provided</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="ClientFacingId">
+
+
+<xs:annotation>
+
+<xs:documentation>An identifier that may link many internal trading trades to a single client facing transaction</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="TradeStatus">
+
+
+<xs:annotation>
+
+<xs:documentation>The status of the trade in the booking system</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="32"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="TradedPrice">
+
+
+<xs:annotation>
+
+<xs:documentation>Traded price of the trade</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:decimal">
+
+<xs:totalDigits value="18"/>
+
+<xs:fractionDigits value="10"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="SpvId">
+
+
+<xs:annotation>
+
+<xs:documentation>For BAC specific reporting</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="32"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="PortId">
+
+
+<xs:annotation>
+
+<xs:documentation>For BAC specific reporting</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="32"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="MtnId">
+
+
+<xs:annotation>
+
+<xs:documentation>For BAC specific reporting</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="32"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="BondId">
+
+
+<xs:annotation>
+
+<xs:documentation>For BAC specific reporting</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="CallPut">
+
+
+<xs:annotation>
+
+
+<xs:documentation>
+Field also being used for Commodity futures to flag if trade is a Close or Settlement price future. These get booked during the day then a process runs at end of day once the settlement and close prices are known to remove the S and re-book with an actual Futures Price. (Sam Burgess Aug2011)
+</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:pattern value="(C|P|S)"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="ExercisedFromId">
+
+
+<xs:annotation>
+
+<xs:documentation>The trade id of the parent trade in the booking system. Typically RMS where an option has been exercised resulting in a new trade </xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="LinkageReference">
+
+
+<xs:annotation>
+
+<xs:documentation>RMS tradeid and SUMMIT mirrorId fields both populate this</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="LinkageReference2">
+
+
+<xs:annotation>
+
+<xs:documentation>SUMMIT external Id populates this</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="RiskSource">
+
+
+<xs:annotation>
+
+
+<xs:documentation>
+The source of the risk trade, which could be different from the tradeSource - eg XDB
+</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="128"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="RiskTrade">
+
+
+<xs:annotation>
+
+<xs:documentation>the full id of the trade in the valuation source system</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="RiskVersion">
+
+
+<xs:annotation>
+
+<xs:documentation>The version of the risk trade in the riskSource (eg XDB)</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="RiskProductType">
+
+
+<xs:annotation>
+
+
+<xs:documentation>
+The product type used to model the trade in the valuation system - this is hoped to be retired once financial product type is in place
+</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="RiskRunVersion">
+
+
+<xs:annotation>
+
+<xs:documentation>Placeholder for future use of versioning risk runs</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="ValuationSource">
+
+
+<xs:annotation>
+
+<xs:documentation>The calculation engine name, ie source of the valuations</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="32"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="RiskReportName">
+
+
+<xs:annotation>
+
+
+<xs:documentation>
+The non-standard identifier of the measure in the valuation source
+</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="RiskId">
+
+
+<xs:annotation>
+
+<xs:documentation>The DPARS standard identifier of the measure</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="40"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="ReportClass">
+
+
+<xs:annotation>
+
+<xs:documentation>The DPARS standard classification of the riskId</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="SubReportClass">
+
+
+<xs:annotation>
+
+
+<xs:documentation>
+The DPARS standard sub-classification of the riskId
+</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="RefCurveClass">
+
+
+<xs:annotation>
+
+<xs:documentation>Asset class of the sensitivity</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="RefCurve">
+
+
+<xs:annotation>
+
+
+<xs:documentation>
+Reference to the specific market data (curve, spread-curve, currency pair) against which risk is being measured.
+</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="RefCurveInfo">
+
+
+<xs:annotation>
+
+<xs:documentation/>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="UBRCode">
+
+
+<xs:annotation>
+
+<xs:documentation/>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="CurrencyPair">
+
+
+<xs:annotation>
+
+<xs:documentation>The currency pair of the Trade</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="6"/>
+
+<xs:pattern value="[A-Z]{6}"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="InSVM">
+
+
+<xs:annotation>
+
+<xs:documentation>Used to indicate if the sending system is intending to send spot vol. matrix to GPC for this sensitivity. Assumed N if not sent.</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:pattern value="(Y|N)"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="RecId">
+
+
+<xs:annotation>
+
+<xs:documentation>Used to send the unique id associated to a transaction will initially only be used for cash in the CARS tables</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:decimal">
+
+<xs:totalDigits value="18"/>
+
+<xs:fractionDigits value="10"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="Node_XY">
+
+
+<xs:annotation>
+
+<xs:documentation>The x and y node</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="Node_Z">
+
+
+<xs:annotation>
+
+<xs:documentation>The z node</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="256"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="NodeRef">
+
+
+<xs:annotation>
+
+<xs:documentation>A reference that identifies what the x,y,z actually mean</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="20"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="ReasonCode">
+
+
+<xs:annotation>
+
+<xs:documentation>A reason code</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="15"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="YNFlag">
+
+
+<xs:annotation>
+
+<xs:documentation>Y or N flag</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:pattern value="(Y|N)"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="RiskGroup">
+
+
+<xs:annotation>
+
+<xs:documentation/>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="Trader">
+
+
+<xs:annotation>
+
+<xs:documentation>Trader of the Trade.</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="SalesPerson">
+
+
+<xs:annotation>
+
+<xs:documentation>SalesPerson of the Trade.</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="Quantity">
+
+
+<xs:annotation>
+
+<xs:documentation>Number of units</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:decimal">
+
+<xs:totalDigits value="18"/>
+
+<xs:fractionDigits value="10"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="AverageCost">
+
+
+<xs:annotation>
+
+<xs:documentation>Average Cost</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:decimal">
+
+<xs:totalDigits value="18"/>
+
+<xs:fractionDigits value="10"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="CreditName">
+
+
+<xs:annotation>
+
+<xs:documentation>DBA field which holds the curve that the trade is booked against</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="PayRec">
+
+
+<xs:annotation>
+
+<xs:documentation/>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="1"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+<!-- Added for the RMS fix feed -->
+
+
+
+<xs:simpleType name="AltTradeInfo">
+
+
+<xs:annotation>
+
+<xs:documentation>additional trade identifier information. Added to hold the RMS TRADEID field (FIX tag 90099) which, despite its name, is not the primary identifier of the trade in RMS</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="64"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+
+<xs:simpleType name="enteredBy">
+
+
+<xs:restriction base="xs:string">
+
+<xs:maxLength value="50"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+<!-- Definition of the content model of a Risk or PnL Report -->
+
+
+
+<xs:complexType name="RiskPoint">
+
+
+<xs:annotation>
+
+
+<xs:documentation>
+The Risk value is a point in an n-dimensional space where n is currently between 1 and 3 (i.e. x, y, z) but may be extended in the near future
+</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:sequence>
+
+<xs:element type="RecId" name="recId" minOccurs="0"/>
+
+<xs:element type="CurrencyId" name="valueCcy" minOccurs="0"/>
+
+<xs:element type="Amount" name="value"/>
+
+<xs:element type="Node_XY" name="x" minOccurs="0"/>
+
+<xs:element type="NodeRef" name="xref" minOccurs="0"/>
+
+<xs:element type="Node_XY" name="y" minOccurs="0"/>
+
+<xs:element type="NodeRef" name="yref" minOccurs="0"/>
+
+<xs:element type="Node_Z" name="z" minOccurs="0"/>
+
+<xs:element type="NodeRef" name="zref" minOccurs="0"/>
+
+</xs:sequence>
+
+</xs:complexType>
+
+
+<xs:complexType name="Report">
+
+
+<xs:sequence>
+
+<xs:element type="ValuationSource" name="valuationSource" minOccurs="0"/>
+
+<xs:element type="RiskReportName" name="reportName"/>
+
+<xs:element type="RiskId" name="riskId" minOccurs="0"/>
+
+<xs:element type="ReportClass" name="reportClass" minOccurs="0"/>
+
+<xs:element type="SubReportClass" name="subReportClass" minOccurs="0"/>
+
+<xs:element type="RefCurveClass" name="refCurveClass" minOccurs="0"/>
+
+<xs:element type="RefCurve" name="refCurve" minOccurs="0"/>
+
+<xs:element type="RefCurveInfo" name="refCurveInfo" minOccurs="0"/>
+
+<xs:element type="CreditCurveFull" name="creditCurveFull" minOccurs="0"/>
+
+<xs:element type="CountryOfIssuer" name="countryOfIssuer" minOccurs="0"/>
+
+<xs:element type="Sector" name="sector" minOccurs="0"/>
+
+<xs:element type="Amount" name="blend" minOccurs="0"/>
+
+<xs:element type="CurrencyPair" name="fxCcyPair" minOccurs="0"/>
+
+<xs:element type="CurrencyId" name="riskCurrency" minOccurs="0"/>
+
+<xs:element type="InSVM" name="inSVM" minOccurs="0"/>
+
+<xs:element type="YNFlag" name="isSkewValue" minOccurs="0"/>
+
+<xs:element type="RiskPoint" name="riskPoint" maxOccurs="unbounded"/>
+
+</xs:sequence>
+
+</xs:complexType>
+
+
+<xs:complexType name="ReportCollection">
+
+
+<xs:sequence>
+
+<xs:element type="Report" name="report" maxOccurs="unbounded"/>
+
+</xs:sequence>
+
+</xs:complexType>
+
+<!-- Definition of the content model of the hierarchical nodes for which risk and/or pnl is structured -->
+
+
+
+<xs:complexType name="SubTrade">
+
+
+<xs:annotation>
+
+<xs:documentation>The id of the trade in the valuation system, against which all of the measures are referenced</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:sequence>
+
+<xs:element type="RiskSource" name="riskSource" minOccurs="0"/>
+
+<xs:element type="RiskTrade" name="riskTrade" minOccurs="0"/>
+
+<xs:element type="RiskVersion" name="riskVersion" minOccurs="0"/>
+
+<xs:element type="RiskProductType" name="riskProductType" minOccurs="0"/>
+
+<xs:element type="RiskRunVersion" name="riskRunVersion" minOccurs="0"/>
+
+<xs:element type="RiskGroup" name="riskGroup" minOccurs="0"/>
+
+<xs:element type="FinancialProductType" name="financialProductType" minOccurs="0"/>
+
+<xs:element type="ReportCollection" name="reportcollection"/>
+
+</xs:sequence>
+
+</xs:complexType>
+
+
+<xs:complexType name="Trade">
+
+
+<xs:annotation>
+
+<xs:documentation>Static data associated to the trade, normally as found in the trade</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:sequence>
+
+<xs:element type="AggregationLevel" name="aggregationLevel" minOccurs="0"/>
+
+<xs:element type="TradeSource" name="tradeSource" minOccurs="0"/>
+
+<xs:element type="PoolId" name="poolId" minOccurs="0"/>
+
+<xs:element type="TradeId" name="tradeId" minOccurs="0"/>
+
+<xs:element type="Version" name="version" minOccurs="0"/>
+
+<xs:element type="xs:dateTime" name="versionTimestamp" minOccurs="0"/>
+
+<xs:element type="SettlementEngineSource" name="settlementEngineSource" minOccurs="0"/>
+
+<xs:element type="SettlementSourceId" name="settlementSourceId" minOccurs="0"/>
+
+<xs:element type="SettlementVersion" name="settlementVersion" minOccurs="0"/>
+
+<xs:element type="SettlementVersion" name="enrichmentVersion" minOccurs="0"/>
+
+<xs:element type="ISIN" name="isin" minOccurs="0"/>
+
+<xs:element type="CUSIP" name="cusip" minOccurs="0"/>
+
+<xs:element type="PrivatePlacement" name="privatePlacement" minOccurs="0"/>
+
+<xs:element type="OtherSecurityId" name="otherSecurityId" minOccurs="0"/>
+
+<xs:element type="DBInstrumentId" name="dbInstrumentId" minOccurs="0"/>
+
+<xs:element type="UnderlyingId" name="underlyingId" minOccurs="0"/>
+
+<xs:element type="ReportingCurve" name="reportingCurve" minOccurs="0"/>
+
+<xs:element type="CreditCurveFull" name="repCurveFull" minOccurs="0"/>
+
+<xs:element type="CountryOfIssuer" name="repCurveCountry" minOccurs="0"/>
+
+<xs:element type="Sector" name="repCurveSector" minOccurs="0"/>
+
+<xs:element type="TradeGroupId" name="tradeGroupId" minOccurs="0"/>
+
+<xs:element type="DBClientId" name="dbClientId" minOccurs="0"/>
+
+<xs:element type="CustomerId" name="customerId" minOccurs="0"/>
+
+<xs:element type="CounterpartyIdLong" name="cptyIdLong" minOccurs="0"/>
+
+<xs:element type="CounterpartySource" name="cptySource" minOccurs="0"/>
+
+<xs:element type="InternalExternalFlag" name="internalExternalFlag" minOccurs="0"/>
+
+<xs:element type="HOCounterpartyType" name="HOCounterpartyType" minOccurs="0"/>
+
+<xs:element type="LegalEntityClient" name="legalEntityClient" minOccurs="0"/>
+
+<xs:element type="ManagementAreaClient" name="managementAreaClient" minOccurs="0"/>
+
+<xs:element type="xs:date" name="tradeDate" minOccurs="0"/>
+
+<xs:element type="BuySell" name="buySell" minOccurs="0"/>
+
+<xs:element type="xs:date" name="effectiveDate" minOccurs="0"/>
+
+<xs:element type="xs:date" name="maturityDate" minOccurs="0"/>
+
+<xs:element type="xs:date" name="underlyingMaturityDate" minOccurs="0"/>
+
+<xs:element type="Amount" name="notional" minOccurs="0"/>
+
+<xs:element type="CurrencyId" name="notionalCurrency" minOccurs="0"/>
+
+<xs:element type="Rate" name="tradingLevel" minOccurs="0"/>
+
+<xs:element type="Rate" name="rate" minOccurs="0"/>
+
+<xs:element type="Amount" name="notional2" minOccurs="0"/>
+
+<xs:element type="CurrencyId" name="notional2Currency" minOccurs="0"/>
+
+<xs:element type="Rate" name="rate2" minOccurs="0"/>
+
+<xs:element type="Amount" name="currentNotional" minOccurs="0"/>
+
+<xs:element type="Amount" name="currentNotional2" minOccurs="0"/>
+
+<xs:element type="AssetLiabilityFlag" name="assetLiabilityFlag" minOccurs="0"/>
+
+<xs:element type="Amount" name="noLots" minOccurs="0"/>
+
+<xs:element type="Fas133Flag" name="FAS133Flag" minOccurs="0"/>
+
+
+<xs:element type="StructureId" name="portfolioCode" minOccurs="0">
+
+
+<xs:annotation>
+
+<xs:documentation>Portfolio code from LS2 on loan trades to enable downstream FOBO recs and ledger journals Dictates the loan classification for both accounting and regulatory treatment.</xs:documentation>
+
+</xs:annotation>
+
+</xs:element>
+
+<xs:element type="StructureId" name="structureId" minOccurs="0"/>
+
+<xs:element type="Narrative" name="narrative" minOccurs="0"/>
+
+<xs:element type="ProductType" name="productType" minOccurs="0"/>
+
+<xs:element type="valEngProdType" name="valEngProdType" minOccurs="0"/>
+
+<xs:element type="ClientFacingId" name="clientFacingId" minOccurs="0"/>
+
+<xs:element type="TradeStatus" name="tradeStatus" minOccurs="0"/>
+
+<xs:element type="TradedPrice" name="tradedPrice" minOccurs="0"/>
+
+<xs:element type="SpvId" name="spvId" minOccurs="0"/>
+
+<xs:element type="PortId" name="portId" minOccurs="0"/>
+
+<xs:element type="MtnId" name="mtnId" minOccurs="0"/>
+
+<xs:element type="BondId" name="bondId" minOccurs="0"/>
+
+<xs:element type="CallPut" name="callPut" minOccurs="0"/>
+
+<xs:element type="Amount" name="premiumAmount" minOccurs="0"/>
+
+<xs:element type="CurrencyId" name="premiumCurrency" minOccurs="0"/>
+
+<xs:element type="xs:date" name="premiumDate" minOccurs="0"/>
+
+<xs:element type="Amount" name="strike" minOccurs="0"/>
+
+<xs:element type="ExercisedFromId" name="exercisedFromId" minOccurs="0"/>
+
+<xs:element type="LinkageReference" name="linkageReference" minOccurs="0"/>
+
+<xs:element type="LinkageReference2" name="linkageReference2" minOccurs="0"/>
+
+<xs:element type="CommonReference" name="commonReference" minOccurs="0"/>
+
+<xs:element type="ReasonCode" name="reasonCode" minOccurs="0"/>
+
+<xs:element type="UBRCode" name="cptyUBR" minOccurs="0"/>
+
+
+<xs:element name="trader" minOccurs="0">
+
+
+<xs:simpleType>
+
+
+<xs:restriction base="Trader">
+
+<xs:maxLength value="32"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+</xs:element>
+
+
+<xs:element name="salesPerson" minOccurs="0">
+
+
+<xs:simpleType>
+
+
+<xs:restriction base="SalesPerson">
+
+<xs:maxLength value="32"/>
+
+</xs:restriction>
+
+</xs:simpleType>
+
+</xs:element>
+
+<xs:element type="StringId" name="riskStructureLevel1" minOccurs="0"/>
+
+<xs:element type="StringId" name="riskStructureLevel2" minOccurs="0"/>
+
+<xs:element type="xs:string" name="riskStructureLevel3" minOccurs="0"/>
+
+<xs:element type="Quantity" name="quantity" minOccurs="0"/>
+
+<xs:element type="AverageCost" name="averageCost" minOccurs="0"/>
+
+<xs:element type="CreditName" name="creditName" minOccurs="0"/>
+
+<xs:element type="PayRec" name="payRec" minOccurs="0"/>
+
+<!-- fields action, farStrike, farNotional, farNotional2 added for the RMS FIX trades -->
+
+
+<xs:element type="StringId" name="action" minOccurs="0"/>
+
+<xs:element type="Amount" name="farStrike" minOccurs="0"/>
+
+<!-- xs:element name="subtrade" type="SubTrade" maxOccurs="unbounded"/ -->
+
+
+<xs:element type="AltTradeInfo" name="altTradeInfo" minOccurs="0"/>
+
+<xs:element type="Amount" name="farNotional" minOccurs="0"/>
+
+<xs:element type="Amount" name="farNotional2" minOccurs="0"/>
+
+<!-- fields added after requirements from FCL and MCC -->
+
+
+<!-<xs:element name="mccEffectiveDate" type="xs:date" minOccurs="0"/> <xs:element name="mccMaturityDate" type="xs:date" minOccurs="0"/> <xs:element name="mccNotional" type="Amount" minOccurs="0"/> <xs:element name="mccNotional2" type="Amount" minOccurs="0"/> <xs:element name="mccNotionalCurrency" type="CurrencyId" minOccurs="0"/> <xs:element name="mccNotional2Currency" type="CurrencyId" minOccurs="0"/> <xs:element name="mccTradeDate" type="xs:date" minOccurs="0"/>-->
+
+
+<!-- Fields added to meet MMD F2B project commitments for the RMS FIX trades-->
+
+
+<xs:element type="xs:dateTime" name="optionExpiry" minOccurs="0"/>
+
+<xs:element type="enteredBy" name="enteredBy" minOccurs="0"/>
+
+<!-- Fields added to met PRDS project & MMD F2B project commitments-->
+
+
+<xs:element type="dbRPID" name="dbRPID" minOccurs="0"/>
+
+<xs:element type="xs:string" name="dbRiskProduct" minOccurs="0"/>
+
+<!-- GRIMISMIS- 1536 by rigoeli -->
+
+
+<xs:element type="xs:string" name="termAssignStatus" minOccurs="0"/>
+
+<!-- subtrade has to go at the end -->
+
+
+<xs:element type="SubTrade" name="subtrade" maxOccurs="unbounded"/>
+
+</xs:sequence>
+
+</xs:complexType>
+
+
+<xs:complexType name="Book">
+
+
+<xs:sequence>
+
+<xs:element type="BookName" name="tradeBook" minOccurs="0"/>
+
+<xs:element type="UBRCode" name="tradeBookUBR" minOccurs="0"/>
+
+<xs:element type="BookName" name="riskBook"/>
+
+<xs:element type="BookName" name="underlyingRiskBook" minOccurs="0"/>
+
+<xs:element type="BookName" name="settlementBook" minOccurs="0"/>
+
+<xs:element type="LegalEntity" name="legalEntity" minOccurs="0"/>
+
+<xs:element type="Desk" name="desk" minOccurs="0"/>
+
+<xs:element type="ManagementArea" name="managementArea" minOccurs="0"/>
+
+<xs:element type="GLRegion" name="glRegion" minOccurs="0"/>
+
+<xs:element type="GermanBankingTrading" name="germanBankingTrading" minOccurs="0"/>
+
+<xs:element type="LocalBankingTrading" name="localBankingTrading" minOccurs="0"/>
+
+<xs:element type="Trade" name="trade" maxOccurs="unbounded"/>
+
+</xs:sequence>
+
+</xs:complexType>
+
+
+<xs:complexType name="File">
+
+
+<xs:annotation>
+
+<xs:documentation>The root element represents a file effective for a date of risk grouped within a set of Books</xs:documentation>
+
+</xs:annotation>
+
+
+<xs:sequence>
+
+<xs:element type="xs:date" name="cobDate"/>
+
+<xs:element type="xs:dateTime" name="creationTime"/>
+
+<xs:element type="xs:anyURI" name="fileLocation"/>
+
+<xs:element type="ContentType" name="contentType"/>
+
+<xs:element type="SignatoryId" name="signOffBy"/>
+
+<xs:element type="SignoffGroup" name="signOffGroup"/>
+
+<xs:element type="NumericId" name="runId" minOccurs="0"/>
+
+<xs:element type="StringId" name="location" minOccurs="0"/>
+
+<xs:element type="StringId" name="department" minOccurs="0"/>
+
+<xs:element type="StringId" name="runType" minOccurs="0"/>
+
+<xs:element type="StringId" name="rateSetId" minOccurs="0"/>
+
+<xs:element type="StringId" name="yieldCurveRateSetId" minOccurs="0"/>
+
+<xs:element type="StringId" name="fxVolatilityRateSetId" minOccurs="0"/>
+
+<xs:element type="StringId" name="commodityRateSetId" minOccurs="0"/>
+
+<xs:element type="Book" name="book" minOccurs="0" maxOccurs="unbounded"/>
+
+</xs:sequence>
+
+<xs:attribute type="xs:string" name="version"/>
+
+</xs:complexType>
+
+<xs:element type="File" name="file"/>
+
+</xs:schema>
